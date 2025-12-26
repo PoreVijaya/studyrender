@@ -34,10 +34,10 @@ CSRF_TRUSTED_ORIGINS = [
     "https://*.railway.app",
 ]
 
-# ⚠ Temporary for non-HTTPS. Change to True after HTTPS enabled
+DEBUG = True
 CSRF_COOKIE_SECURE = False
 SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SAMESITE = "Lax"
+
 
 # --------------------------------------------------
 # APPLICATIONS
