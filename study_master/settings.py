@@ -20,13 +20,17 @@ SECRET_KEY = os.environ.get(
 
 DEBUG = os.environ.get("DEBUG", "False") == "True"
 
+# ✅ REQUIRED FOR RENDER + RAILWAY
 ALLOWED_HOSTS = [
-    ".railway.app",
     "localhost",
     "127.0.0.1",
+    ".onrender.com",
+    ".railway.app",
 ]
 
+# ✅ FIX 400 ERROR
 CSRF_TRUSTED_ORIGINS = [
+    "https://*.onrender.com",
     "https://*.railway.app",
 ]
 
@@ -54,6 +58,10 @@ INSTALLED_APPS = [
 # --------------------------------------------------
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+
+    # ✅ REQUIRED FOR STATIC FILES ON RENDER
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -110,8 +118,6 @@ DATABASES = {
     }
 }
 
-
-
 # --------------------------------------------------
 # PASSWORD VALIDATION
 # --------------------------------------------------
@@ -131,11 +137,18 @@ USE_I18N = True
 USE_TZ = True
 
 # --------------------------------------------------
-# STATIC / MEDIA FILES
+# STATIC FILES (Render)
 # --------------------------------------------------
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+# --------------------------------------------------
+# MEDIA FILES
+# ⚠ Render filesystem is TEMPORARY
+# Use Firebase / Cloudinary for production images
+# --------------------------------------------------
 MEDIA_URL = "/media/"
 MEDIA_ROOT = MEDIA_DIR
 
