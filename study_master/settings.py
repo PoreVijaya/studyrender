@@ -28,14 +28,15 @@ ALLOWED_HOSTS = [
     ".railway.app",
 ]
 
-# ✅ FIX 400 ERROR
+# ✅ CSRF & Session
 CSRF_TRUSTED_ORIGINS = [
     "https://*.onrender.com",
     "https://*.railway.app",
 ]
 
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
+# ⚠ Temporary for non-HTTPS. Change to True after HTTPS enabled
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SAMESITE = "Lax"
 
 # --------------------------------------------------
@@ -59,7 +60,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
 
-    # ✅ REQUIRED FOR STATIC FILES ON RENDER
+    # ✅ Required for static files on Render
     "whitenoise.middleware.WhiteNoiseMiddleware",
 
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -103,18 +104,10 @@ DATABASES = {
         "ENGINE": "django.db.backends.mysql",
         "NAME": os.environ.get("MYSQLDATABASE", "railway"),
         "USER": os.environ.get("MYSQLUSER", "root"),
-        "PASSWORD": os.environ.get(
-            "MYSQLPASSWORD",
-            "ObfUGxkkpdFraAqCeOYSYxFZRALnSJoO"
-        ),
-        "HOST": os.environ.get(
-            "MYSQLHOST",
-            "mysql.railway.internal"
-        ),
+        "PASSWORD": os.environ.get("MYSQLPASSWORD", ""),
+        "HOST": os.environ.get("MYSQLHOST", "mysql.railway.internal"),
         "PORT": os.environ.get("MYSQLPORT", "3306"),
-        "OPTIONS": {
-            "charset": "utf8mb4",
-        },
+        "OPTIONS": {"charset": "utf8mb4"},
     }
 }
 
@@ -141,13 +134,11 @@ USE_TZ = True
 # --------------------------------------------------
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_DIRS = [STATIC_DIR]
-
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # --------------------------------------------------
 # MEDIA FILES
-# ⚠ Render filesystem is TEMPORARY
+# ⚠ Render filesystem is temporary
 # Use Firebase / Cloudinary for production images
 # --------------------------------------------------
 MEDIA_URL = "/media/"
