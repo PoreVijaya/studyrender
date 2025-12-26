@@ -1,0 +1,104 @@
+{% extends 'school/adminbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+<style>
+  #password { padding-right: 50px; }
+</style>
+
+<h3 class="text-dark ms-2">Add Student</h3>
+
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  {% if form1.errors or form2.errors %}
+    <div class="alert alert-danger">Please fix the errors below.</div>
+  {% endif %}
+
+  <div class="container my-5">
+    <div class="card shadow p-4">
+
+      <h4>Student Details</h4>
+      <hr>
+
+      <div class="row">
+
+        <!-- LEFT -->
+        <div class="col-md-6">
+          <div class="form-floating mb-3">
+            {% render_field form1.first_name class="form-control" %}
+            <label>First Name</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            {% render_field form1.username class="form-control" %}
+            <label>Username</label>
+            {% for error in form1.username.errors %}
+              <small class="text-danger">{{ error }}</small>
+            {% endfor %}
+          </div>
+
+          <div class="form-floating mb-3">
+            {% render_field form2.mobile class="form-control" %}
+            <label>Contact</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            {% render_field form2.payment_date class="form-control" %}
+            <label>Joining Date</label>
+          </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="col-md-6">
+          <div class="form-floating mb-3">
+            {% render_field form1.last_name class="form-control" %}
+            <label>Last Name</label>
+          </div>
+
+          <div class="form-floating mb-3 position-relative">
+            {% render_field form1.password id="password" %}
+            <label>Password</label>
+
+            <span class="position-absolute top-50 end-0 translate-middle-y me-3"
+                  onclick="togglePassword()" style="cursor:pointer;">
+              <i id="eye-icon" class="fas fa-eye-slash"></i>
+            </span>
+          </div>
+
+          <div class="form-floating mb-3">
+            {% render_field form2.vehicle_number class="form-control" %}
+            <label>Vehicle Number</label>
+          </div>
+
+          <div class="mb-3">
+            <label>Profile Picture</label>
+            {% render_field form2.profile_pic class="form-control" %}
+          </div>
+        </div>
+
+      </div>
+
+      <button type="submit" class="btn btn-success w-25 mx-auto d-block">
+        Submit
+      </button>
+
+    </div>
+  </div>
+</form>
+
+<script>
+function togglePassword() {
+  const field = document.getElementById("password");
+  const icon = document.getElementById("eye-icon");
+  if (field.type === "password") {
+    field.type = "text";
+    icon.classList.replace("fa-eye-slash", "fa-eye");
+  } else {
+    field.type = "password";
+    icon.classList.replace("fa-eye", "fa-eye-slash");
+  }
+}
+</script>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'school/adminbase.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Expenses Dashboard</h2>
+    <div class="row mt-4">
+
+        <!-- Expenses List Card -->
+        <div class="col-md-6 mb-3">
+            <a href="{% url 'expense_list' %}" class="text-decoration-none">
+                <div class="card text-lightdark bg-thistle shadow h-100 text-center">
+                    <div class="card-body">
+                        <i class="fas fa-money-bill-wave fa-2x mb-2"></i>
+                        <h5 class="card-title">Expenses</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Add Expense Card -->
+        <div class="col-md-6 mb-3">
+            <a href="{% url 'add_expense' %}" class="text-decoration-none">
+                <div class="card text-lightdark bg-thistle shadow h-100 text-center">
+                    <div class="card-body">
+                        <i class="fas fa-plus-circle fa-2x mb-2"></i>
+                        <h5 class="card-title">Add Expense</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<!-- Optional: Add gradient styles locally if not in base -->
+<style>
+    .bg-thistle {
+        background-image: linear-gradient(to right, rgb(197, 145, 197), rgb(220, 189, 220));
+    }
+    .text-lightdark {
+        color: rgb(68, 65, 65) !important;
+    }
+    .card:hover {
+        transform: scale(1.05);
+        transition: 0.3s;
+    }
+</style>
+{% endblock content %}

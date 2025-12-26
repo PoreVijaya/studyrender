@@ -1,0 +1,68 @@
+{% extends 'school/adminbase.html' %}
+{% block content %}
+
+<head>
+  <style>
+    .bg-thistle {
+      background-image: linear-gradient(to right, rgb(197, 145, 197), rgb(220, 189, 220));
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .text-lightdark { 
+      color: rgb(68, 65, 65) !important; 
+    }
+
+    /* Hover effect for cards */
+    .card:hover {
+      transform: translateY(-8px); /* lift the card */
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3); /* stronger shadow */
+    }
+  </style>
+</head>
+
+<body style="background-color: #f4f7fc;">
+  <h3 class="text-dark ms-2 mb-4">Student Overview</h3>
+  <div class="container py-3">
+    <div class="row g-4">
+
+      <!-- View All Students -->
+      <div class="col-lg-4 col-md-6">
+        <a href="/admin-view-student" class="text-decoration-none">
+          <div class="card text-lightdark bg-thistle shadow h-100">
+            <div class="card-body text-center">
+              <h5 class="card-title">View All Students</h5>
+              <i class="fa fa-eye fa-2x"></i>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Add Student -->
+      <div class="col-lg-4 col-md-6">
+        <a href="/admin-add-student" class="text-decoration-none">
+          <div class="card text-lightdark bg-thistle shadow h-100">
+            <div class="card-body text-center">
+              <h5 class="card-title">Add Student</h5>
+              <i class="fa fa-plus-circle fa-2x"></i>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- View Student Fee Records -->
+      <div class="col-lg-4 col-md-6">
+        <a href="{% url 'select-student' %}" class="text-decoration-none">
+          <div class="card text-lightdark bg-thistle shadow h-100">
+            <div class="card-body text-center">
+              <h5 class="card-title">View Student Fee Records</h5>
+              <i class="fa-solid fa-indian-rupee-sign fa-2x"></i>
+            </div>
+          </div>
+        </a>
+      </div>
+      
+
+    </div>
+  </div>
+</body>
+
+{% endblock content %}

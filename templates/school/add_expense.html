@@ -1,0 +1,54 @@
+{% extends 'school/adminbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Add Expense</h2>
+
+    <div class="card shadow-sm p-4 mt-3">
+        <h5 class="mb-3">Expense Details</h5>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+           <div class="row g-3">
+
+                  <!-- Left Side: 3 fields stacked vertically -->
+                  <div class="col-md-6">
+                      <!-- Category -->
+                      <div class="mb-3">
+                          <label for="id_category" class="form-label"><strong>Category</strong></label>
+                          {{ form.category|add_class:"form-control" }}
+                      </div>
+
+                      <!-- Amount -->
+                      <div class="mb-3">
+                          <label for="id_amount" class="form-label"><strong>Amount</strong></label>
+                          {{ form.amount|add_class:"form-control" }}
+                      </div>
+
+                      <!-- Date -->
+                      <div class="mb-3">
+                          <label for="id_date" class="form-label"><strong>Date</strong></label>
+                          {{ form.date|add_class:"form-control" }}
+                      </div>
+                  </div>
+
+                  <!-- Right Side: Description field -->
+                  <div class="col-md-6">
+                      <div class="mb-3">
+                          <label for="id_description" class="form-label"><strong>Description</strong></label>
+                          {{ form.description|add_class:"form-control" }}
+                      </div>
+                  </div>
+
+              </div>
+
+
+            <div class="mt-4">
+                <button type="submit" class="btn btn-success">Add Expense</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+{% endblock content %}

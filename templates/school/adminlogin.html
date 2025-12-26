@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+{% load widget_tweaks %}
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SMS - Django</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body class="bg-light">
+  {% include "school/navbar.html" %}
+
+  <div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="col-md-5">
+      <form method="post" class="p-4 shadow rounded bg-white">
+        {% csrf_token %}
+        
+        <h4 class="text-center mb-4 text-primary">Admin Login</h4>
+
+        <div class="mb-3">
+          {% render_field form.username class="form-control" placeholder="Username" %}
+        </div>
+
+        <div class="mb-5 position-relative">
+          {% render_field form.password class="form-control pe-5" placeholder="Password" id="passwordInput" %}
+          <i class="fa-solid fa-eye position-absolute top-50 end-0 translate-middle-y me-3 text-muted" id="togglePassword" style="cursor: pointer;"></i>
+        </div>
+
+        <!-- <div class="mb-5">
+          {% render_field form.password class="form-control" placeholder="Password" %}
+        </div> -->
+
+        <button type="submit" class="btn btn-success w-100">Login</button>
+
+        <!-- <div class="text-center mt-3">
+          Don't have an account? <a href="adminsignup" class="text-decoration-none">Sign Up here</a>
+        </div> -->
+      </form>
+    </div>
+  </div>
+  {% include "school/footer.html" %}
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+<script>
+  const togglePassword = document.getElementById('togglePassword');
+  const passwordInput = document.getElementById('passwordInput');
+
+  togglePassword.addEventListener('click', function () {
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    this.classList.toggle('fa-eye');
+    this.classList.toggle('fa-eye-slash');
+  });
+</script>
+
+
+</html>

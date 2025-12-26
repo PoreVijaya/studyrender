@@ -1,0 +1,43 @@
+{% extends 'school/adminbase.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ student.get_name }} - Monthly Fee Records</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Month</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Fee (₹)</th>
+                <th>Paid (₹)</th>
+                <th>Remaining (₹)</th>
+                <th>Facility</th>
+                <th>Method</th>
+                <th>Collected By</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in fee_records %}
+            <tr>
+                <td>{{ record.month }}</td>
+                <td>{{ record.start_date|date:"d/m/Y" }}</td>
+                <td>{{ record.end_date|date:"d/m/Y" }}</td>
+                <td>{{ record.fee }}</td>
+                <td>{{ record.paid_fees }}</td>
+                <td>{{ record.remaining_fee }}</td>
+                <td>{{ record.get_facility_display|default:"—" }}</td>
+                <td>{{ record.get_payment_method_display }}</td>
+                <td>{{ record.collected_by.get_full_name|default:"N/A" }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="8" class="text-center">No Fee Records Found</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="alert alert-info">
+        <strong>Totals:</strong> Fee: ₹{{ total_fee }}, Paid: ₹{{ total_paid }}, Remaining: ₹{{ total_remaining }}
+    </div>
+    <a href="{% url 'add-fee-record' student.id %}" class="btn btn-success">Add New Month Record</a>
+    <a href="{% url 'select-student' %}" class="btn btn-secondary">Back</a>
+</div>
+{% endblock %}

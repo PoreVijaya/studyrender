@@ -1,0 +1,141 @@
+{% extends 'school/adminbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+<style>
+  #password {
+    padding-right: 50px;
+  }
+  .profile-preview {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+</style>
+
+<h3 class="text-dark ms-2">Update Student</h3>
+
+<form method="post" enctype="multipart/form-data"> 
+  {% csrf_token %}
+  <div class="container my-5">
+    <div class="card shadow p-3">
+      <h4 class="mb-0">Student Details</h4>
+      <hr>
+
+      <!-- Show form errors -->
+      {% if form1.errors %}
+        <div class="alert alert-danger">{{ form1.errors }}</div>
+      {% endif %}
+      {% if form2.errors %}
+        <div class="alert alert-danger">{{ form2.errors }}</div>
+      {% endif %}
+
+      <div class="row">
+
+        <!-- Left Column -->
+        <div class="col-md-6">
+          <div class="form-floating mb-4">
+            {% render_field form1.first_name class="form-control" id="fname" placeholder="First Name" %}
+            <label for="fname">First Name</label>
+          </div>
+
+          <div class="form-floating mb-4">
+            {% render_field form1.username class="form-control" id="uname" placeholder="Username" %}
+            <label for="uname">Username</label>
+          </div>
+
+          <div class="form-floating mb-4">
+            {% render_field form2.mobile class="form-control" id="contact" placeholder="Contact" %}
+            <label for="contact">Contact</label>
+          </div>
+
+          <!-- Joining Date with calendar -->
+          <div class="form-floating mb-4">
+            {{ form2.payment_date }}
+            <label for="id_payment_date">Joining Date</label>
+          </div>
+
+          <!-- Paid Fees -->
+          <!-- <div class="form-floating mb-3">
+            {% render_field form2.paid_fees class="form-control" id="paid_fees" placeholder="₹ Paid Fee" %}
+            <label for="paid_fees">Paid Fee</label>
+          </div> -->
+
+          <!-- Expiration Date with calendar -->
+          <!-- <div class="form-floating mb-3">
+            {{ form2.expiration_date }}
+            <label for="id_expiration_date">Expiration Date</label>
+          </div> -->
+        </div>
+
+        <!-- Right Column -->
+        <div class="col-md-6">
+          <div class="form-floating mb-3">
+            {% render_field form1.last_name class="form-control" id="lname" placeholder="Last Name" %}
+            <label for="lname">Last Name</label>
+          </div>
+
+          <div class="form-floating mb-3 position-relative">
+            {% render_field form1.password class="form-control" id="password" type="password" placeholder="Password" %}
+            <label for="password">Password</label>
+            <span class="position-absolute top-50 end-0 translate-middle-y me-3" onclick="togglePassword()" style="cursor: pointer;">
+              <i id="eye-icon" class="fas fa-eye-slash"></i>
+            </span>
+          </div>
+
+          <!-- <div class="form-floating mb-3">
+            {% render_field form2.fee class="form-control" id="fees" placeholder="₹ Fee" %}
+            <label for="fees">Fee</label>
+          </div> -->
+
+          <!-- Facility Select -->
+          <!-- <div class="form-floating mb-3">
+            {% render_field form2.facility class="form-select" id="facility" %}
+            <label for="facility">Facility</label>
+          </div> -->
+
+          <!-- Payment Method Select -->
+          <!-- <div class="form-floating mb-3">
+            {% render_field form2.payment_method class="form-select" id="payment_method" %}
+            <label for="payment_method">Payment Method</label>
+          </div> -->
+
+           <!-- Vehicle Number Field Added -->
+          <div class="form-floating mb-2">
+            {% render_field form2.vehicle_number class="form-control" id="vehicle_number" placeholder="Vehicle Number" %}
+            <label for="vehicle_number">Vehicle Number</label>
+          </div>
+
+          <div class="mb-3">
+            <label for="profile_pic" class="form-label">Profile Picture</label>
+            {% render_field form2.profile_pic class="form-control" id="profile_pic" %}
+          </div>
+        </div>
+
+      </div>
+
+      <button type="submit" class="btn btn-success w-25 mx-auto d-block mt-3">Submit</button>
+    </div>
+  </div>
+</form>
+
+<script>
+  function togglePassword() {
+    var passwordField = document.getElementById("password");
+    var eyeIcon = document.getElementById("eye-icon");
+
+    if (passwordField.type === "password") {
+      passwordField.type = "text";
+      eyeIcon.classList.remove("fa-eye-slash");
+      eyeIcon.classList.add("fa-eye");
+    } else {
+      passwordField.type = "password";
+      eyeIcon.classList.remove("fa-eye");
+      eyeIcon.classList.add("fa-eye-slash");
+    }
+  }
+</script>
+
+{% endblock content %}

@@ -1,0 +1,13 @@
+{% extends 'school/adminbase.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Select Student for Fee Records</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">{{ form.student.label_tag }} {{ form.student }}</div>
+        <button type="submit" class="btn btn-primary">View Fee Records</button>
+    </form>
+    <br>
+    <a href="{% url 'admin-student' %}" class="btn btn-secondary">Back to Students</a>
+</div>
+{% endblock %}

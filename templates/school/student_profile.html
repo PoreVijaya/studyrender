@@ -1,0 +1,49 @@
+{% extends 'school/studentbase.html' %}
+{% block content %}
+<head>
+    <style>
+        .input-bg-color{
+            background-color: #dde6f0;
+            border: #8caed4 1px solid;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <div class="card shadow p-4 rounded">
+        <h3 class="mb-0 text-primary">Student Profile</h3>
+        <hr>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label fw-bold">First Name</label>
+                <input type="text" class="form-control input-bg-color" value="{{ student_user.first_name }}" readonly>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Last Name</label>
+                <input type="text" class="form-control input-bg-color" value="{{ student_user.last_name }}" readonly>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Username</label>
+                <input type="text" class="form-control input-bg-color" value="{{ student_user.username }}" readonly>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Date Joined</label>
+                <input type="text" class="form-control input-bg-color" value="{{ student_user.date_joined|date:'M d, Y H:i A' }}" readonly>
+            </div>
+            {% if student_extra %}
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Roll no</label>
+                <input type="text" class="form-control input-bg-color" value="{{ student_extra.roll }}" readonly>
+            </div>
+           
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Contact</label>
+                <input type="text" class="form-control input-bg-color" value="{{ student_extra.mobile }}" readonly>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+</body>
+{% endblock %}

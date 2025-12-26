@@ -1,0 +1,93 @@
+{% extends 'school/adminbase.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card p-4 shadow-lg">
+
+        <h3 class="mb-3">
+            Add Fee Record for
+            <strong>{{ student.user.first_name }} {{ student.user.last_name }}</strong>
+        </h3>
+        <hr>
+
+        <form method="POST" novalidate>
+            {% csrf_token %}
+
+            <!-- Month -->
+            <div class="mb-3">
+                <label class="form-label">Month</label>
+                {{ form.month }}
+                {% if form.month.errors %}
+                    <div class="text-danger small">{{ form.month.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <!-- Start Date -->
+            <div class="mb-3">
+                <label class="form-label">Start Date</label>
+                {{ form.start_date }}
+                {% if form.start_date.errors %}
+                    <div class="text-danger small">{{ form.start_date.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <!-- End Date -->
+            <div class="mb-3">
+                <label class="form-label">End Date</label>
+                {{ form.end_date }}
+                {% if form.end_date.errors %}
+                    <div class="text-danger small">{{ form.end_date.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <!-- Facility Dropdown -->
+            <div class="mb-3">
+                <label class="form-label">Facility</label>
+                {{ form.facility }}
+                {% if form.facility.errors %}
+                    <div class="text-danger small">{{ form.facility.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <!-- Payment Method -->
+            <div class="mb-3">
+                <label class="form-label">Payment Method</label>
+                {{ form.payment_method }}
+                {% if form.payment_method.errors %}
+                    <div class="text-danger small">{{ form.payment_method.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <!-- Fee -->
+            <div class="mb-3">
+                <label class="form-label">Total Fee</label>
+                {{ form.fee }}
+                {% if form.fee.errors %}
+                    <div class="text-danger small">{{ form.fee.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <!-- Paid Fees -->
+            <div class="mb-3">
+                <label class="form-label">Paid Amount</label>
+                {{ form.paid_fees }}
+                {% if form.paid_fees.errors %}
+                    <div class="text-danger small">{{ form.paid_fees.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <!-- Buttons -->
+            <div class="mt-4">
+                <button type="submit" class="btn btn-success">
+                    Save Record
+                </button>
+                <a href="{% url 'student-fee-list' student.id %}" class="btn btn-secondary">
+                    Back
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+{% endblock %}
